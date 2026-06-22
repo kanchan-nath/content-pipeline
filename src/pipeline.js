@@ -1,14 +1,14 @@
-import "../configs/env.js";
+import "../src/configs/env.js";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import cron from "node-cron";
 
-import logger from "../utils/logger.js";
-import { fetchRepoTree, fetchFileContent } from "../services/github.service.js";
-import { analyzeFile } from "../services/groq.service.js";
-import { publishToHashnode } from "../services/hashnode.service.js";
-import { publishToDevto } from "../services/devto.service.js";
+import logger from "../src/utils/logger.js";
+import { fetchRepoTree, fetchFileContent } from "../src/services/github.service.js";
+import { analyzeFile } from "../src/services/groq.service.js";
+import { publishToHashnode } from "../src/services/hashnode.service.js";
+import { publishToDevto } from "../src/services/devto.service.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const DRAFTS_DIR = path.resolve(__dirname, "../../drafts");

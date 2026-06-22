@@ -1,0 +1,2 @@
+[2026-06-22T20:59:22.536Z] INFO: Pipeline start → your_github_username/your_private_repo_name (main)
+[2026-06-22T20:59:22.992Z] ERROR: Pipeline error: Request failed with status code 401
