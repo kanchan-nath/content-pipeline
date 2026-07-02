@@ -1,0 +1,41 @@
+name: content-pipeline
+
+on:
+  schedule:
+    - cron: "0 */4 * * *"   # every 4hr
+  workflow_dispatch: {}      # manual trigger button in Actions tab
+
+concurrency:
+  group: content-pipeline
+  cancel-in-progress: false  # don't kill a run mid-way, just queue next one
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15       # safety net, kill if LLM call hangs
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - run: npm install
+
+      - name: run pipeline once
+        run: node src/pipeline.js --once
+        env:
+          GITHUB_OWNER: ${{ secrets.GH_OWNER }}
+          GITHUB_REPO: ${{ secrets.GH_REPO }}
+          GITHUB_BRANCH: main
+          NVIDIA_API_KEY: ${{ secrets.NVIDIA_API_KEY }}
+
+      - name: commit generated files
+        run: |
+          git config user.name "pipeline-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add Due/ logs/
+          git diff --staged --quiet || git commit -m "auto: pipeline run $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git pull --rebase origin main
+          git push
