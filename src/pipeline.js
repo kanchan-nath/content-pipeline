@@ -93,9 +93,9 @@ const processFile = async (owner, repo, filePath) => {
 // ─── Main pipeline run ────────────────────────────────────────────────────────
 
 const runPipeline = async () => {
-  const owner = process.env.GITHUB_OWNER;
-  const repo = process.env.GITHUB_REPO;
-  const branch = process.env.GITHUB_BRANCH || "main";
+  const owner = process.env.OWNER;
+  const repo = process.env.REPO;
+  const branch = process.env.BRANCH || "main";
 
   if (!owner || !repo) {
     logger.error("GITHUB_OWNER and GITHUB_REPO required in .env");
@@ -137,9 +137,9 @@ if (mode === "--once") {
 } else if (mode === "--all") {
   // process ALL unprocessed files back to back (careful: rate limits)
   const runAll = async () => {
-    const owner = process.env.GITHUB_OWNER;
-    const repo = process.env.GITHUB_REPO;
-    const branch = process.env.GITHUB_BRANCH || "main";
+    const owner = process.env.OWNER;
+    const repo = process.env.REPO;
+    const branch = process.env.BRANCH || "main";
     const files = await fetchRepoTree(owner, repo, branch);
     const unprocessed = files.filter((f) => !isProcessed(f));
     logger.info(`Processing all ${unprocessed.length} unprocessed files...`);
@@ -151,8 +151,8 @@ if (mode === "--once") {
   runAll();
 } else {
   // default: cron schedule — runs every day at 9am, processes 1 file
-  logger.info("Pipeline running on schedule: daily 9am");
-  cron.schedule("0 9 * * *", () => {
+  logger.info("Pipeline running on schedule: every 4hr");
+  cron.schedule("0 */4 * * *", () => {
     logger.info("Cron triggered");
     runPipeline();
   });

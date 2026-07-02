@@ -23,7 +23,7 @@ const shouldSkip = (path) => {
 };
 
 const getHeaders = () => ({
-  Authorization: `Bearer ${process.env.GITHUB_PAT}`,
+  Authorization: `Bearer ${process.env.PAT}`,
   Accept: "application/vnd.github.v3+json",
   "User-Agent": "content-pipeline",
 });

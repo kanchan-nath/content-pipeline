@@ -1,9 +1,4 @@
 {
-  ".circleci/config.yml": {
-    "filePath": ".circleci/config.yml",
-    "savedTo": "/Users/kanchannath/Coding/content-pipeline/Due/.circleciconfig.yml.md",
-    "processedAt": "2026-07-02T04:51:18.638Z"
-  },
   ".coderabbit.yaml": {
     "filePath": ".coderabbit.yaml",
     "savedTo": "/Users/kanchannath/Coding/content-pipeline/Due/CodeRabbit-Configuration-Guide-for-Branch-Based-Review-Automation.md",
