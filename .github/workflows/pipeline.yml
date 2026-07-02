@@ -24,11 +24,13 @@ jobs:
       - run: npm install
 
       - name: run pipeline once
-        run: node src/pipeline.js --once
+        run: node src/pipeline.js
         env:
-          GITHUB_OWNER: ${{ secrets.GH_OWNER }}
-          GITHUB_REPO: ${{ secrets.GH_REPO }}
-          GITHUB_BRANCH: main
+          env:
+          OWNER: ${{ secrets.OWNER }}
+          REPO: ${{ secrets.REPO }}
+          BRANCH: ${{ secrets.BRANCH }}
+          PAT: ${{ secrets.PAT }}
           NVIDIA_API_KEY: ${{ secrets.NVIDIA_API_KEY }}
 
       - name: commit generated files
