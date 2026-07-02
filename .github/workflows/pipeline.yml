@@ -2,17 +2,17 @@ name: content-pipeline
 
 on:
   schedule:
-    - cron: "0 */4 * * *"   # every 4hr
-  workflow_dispatch: {}      # manual trigger button in Actions tab
+    - cron: "0 */4 * * *" # every 4hr
+  workflow_dispatch: {} # manual trigger button in Actions tab
 
 concurrency:
   group: content-pipeline
-  cancel-in-progress: false  # don't kill a run mid-way, just queue next one
+  cancel-in-progress: false # don't kill a run mid-way, just queue next one
 
 jobs:
   run:
     runs-on: ubuntu-latest
-    timeout-minutes: 15       # safety net, kill if LLM call hangs
+    timeout-minutes: 15 # safety net, kill if LLM call hangs
 
     steps:
       - uses: actions/checkout@v4
@@ -23,15 +23,15 @@ jobs:
 
       - run: npm install
 
-      - name: run pipeline once
+      - name: run pipeline
         run: node src/pipeline.js
         env:
-          env:
           OWNER: ${{ secrets.OWNER }}
           REPO: ${{ secrets.REPO }}
           BRANCH: ${{ secrets.BRANCH }}
           PAT: ${{ secrets.PAT }}
           NVIDIA_API_KEY: ${{ secrets.NVIDIA_API_KEY }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
 
       - name: commit generated files
         run: |
