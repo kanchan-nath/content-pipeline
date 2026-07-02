@@ -48,7 +48,7 @@ File: ${filePath}
 
 Code:
 \`\`\`
-${fileContent.slice(0, 4000)}
+${fileContent}
 \`\`\`
 
 ## Role
@@ -74,16 +74,24 @@ Cover, where relevant:
 - Trade offs, if any — don't present every choice as flawless
 
 ## Step 3: SEO Requirements
-- Title: use the single highest search volume, most relevant keyword phrase for the topic (e.g. "Node.js Express Authentication Tutorial" style phrasing) so it can rank first on Google.
+-Title: use exactly ONE primary keyword phrase, 3-6 words, matching real search intent (e.g. "Node.js RAG API Tutorial" not "Node.js Express RAG API Tutorial: Building a Document Q&A System with Vector Search"). Do not stack multiple keyword phrases with colons/subtitles — pick the single phrase with highest search volume and commit to it. (e.g. "Node.js Express Authentication Tutorial" style phrasing) so it can rank first on Google.
 - Naturally weave high volume, high intent developer search keywords throughout headers and body (e.g. "how to", "best practices", "tutorial", "example", "guide" combined with the actual tech names: React, Node.js, Express, PostgreSQL, Prisma, Redis, BullMQ, Pinecone, RAG, etc.)
 - Use proper heading hierarchy (H1 once, H2 for major sections, H3 for sub-points) since Google weights headers heavily.
 - Include a short meta-style summary paragraph near the top (2-3 sentences) that could double as a search snippet.
-- End with a call to action linking to https://studeq.onrender.com/ as a backlink, framed naturally (e.g. "See this pattern live in production at StudeQ").
+- End with a call to action linking to https://studeq.onrender.com/ (canonical production domain — do not use studeq.onrender.com, which is the deploy host and hurts domain SEO signals). as a backlink, framed naturally (e.g. "See this pattern live in production at StudeQ").
 
 ## Step 4: Diagrams
-Generate as many Mermaid flowcharts as genuinely help explain flow — err on the side of more diagrams, not fewer. Use these for: system architecture, request/response flow, data flow between services, auth flow, queue/worker flow, and any multi-step process. Use this format:
+Generate minimum 3 diagrams for single-file docs, minimum 5 for multi-service/multi-file docs. Required coverage, include each that applies:
+1. High-level architecture (client → API → DB/external services)
+2. Primary request/response flow being documented
+3. Any auth/validation flow present
+4. Any queue/async/background job flow present
+5. Any error/cleanup/rollback flow present
+Do not skip a diagram type just because it seems simple — simple flows still help reader.
+
+Use these for: system architecture, request/response flow, data flow between services, auth flow, queue/worker flow, and any multi-step process etc.. Use this format:
 "
-mermaid
+\`\`\` mermaid
 flowchart LR
 U[Student]-- >| uploads notes | A[StudeQ Client]
 A-- > B[Express API]
@@ -94,7 +102,7 @@ D-- >| flashcards / quiz / answer | A
 B-- > E[(Postgres + Mongo)]
 B-- > F[Redis / BullMQ Queue]
 F-- > G[Razorpay Payments]
-
+\`\`\`
 
 Each diagram must be preceded by 1-2 sentences of plain language context, and followed by a short explanation of what the arrows/nodes mean.
 
@@ -104,6 +112,9 @@ Each diagram must be preceded by 1-2 sentences of plain language context, and fo
 - No bullet point overload where prose reads better — mix paragraphs and lists naturally.
 - Short, clear sentences over long, dense ones.
 - Vary sentence structure so it doesn't sound machine generated.
+- Only use code that is literally present in the provided file content.
+- If a function is called but its implementation is not shown, write "implementation not shown in provided excerpt" instead of guessing or writing pseudocode.
+Closing/summary section: do not use generic wrap-up phrasing ("add up to a robust, maintainable system", "in conclusion"). End on a specific, concrete takeaway instead — one real thing the reader should try or watch for in their own code.
 
 ## Output Format
 - Single markdown document.
@@ -131,8 +142,8 @@ const analyzeFile = async (filePath, fileContent) => {
       { role: "system", content: SYSTEM_PROMPT },
       { role: "user", content: buildPrompt(filePath, fileContent) },
     ],
-    temperature: 1,
-    top_p: 0.95,
+    temperature: 0.7,
+    top_p: 0.9,
     max_completion_tokens: 16384,
     // deepseek-v4-pro is a reasoning model — disable thinking so
     // the response body is pure JSON, not reasoning + JSON
