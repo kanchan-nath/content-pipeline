@@ -12,7 +12,7 @@ concurrency:
 jobs:
   run:
     runs-on: ubuntu-latest
-    timeout-minutes: 15 # safety net, kill if LLM call hangs
+    timeout-minutes: 30 # bumped from 15 — checkout+install+LLM call can eat 10-12min alone
 
     steps:
       - uses: actions/checkout@v4
