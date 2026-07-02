@@ -1,7 +1,7 @@
 # Content Pipeline
 
 Auto-generates blog posts from GitHub repo code using Groq LLM.
-Posts to Hashnode + Dev.to. Saves LinkedIn drafts locally.
+Saves full output locally to `Due/` as `title.md` — you post manually.
 
 ## Setup
 
@@ -19,9 +19,6 @@ cp .env.example .env
 | `GITHUB_OWNER` | ur GitHub username |
 | `GITHUB_REPO` | repo name (private ok) |
 | `GROQ_API_KEY` | console.groq.com |
-| `HASHNODE_API_KEY` | hashnode.com → Account Settings → Developer |
-| `HASHNODE_PUBLICATION_ID` | hashnode.com → ur blog → Settings → scroll down to Publication ID |
-| `DEVTO_API_KEY` | dev.to → Settings → Extensions → API Keys |
 
 ## Run
 
@@ -40,17 +37,17 @@ node src/pipeline.js
 
 1. Fetches all files from ur private GitHub repo
 2. Skips already-processed files (tracked in `logs/processed.json`)
-3. For each file → Groq generates 6 content pieces
-4. Auto-publishes to Hashnode + Dev.to
-5. Saves LinkedIn post draft to `drafts/` folder
-6. Processes 1 file per cron run (avoids spam)
+3. For each file → Groq generates content pieces
+4. Saves full output to `Due/<title>.md` (filename = model's title, sanitized)
+5. Processes 1 file per cron run (avoids spam)
 
-## Generated content per file
+## Generated content per file (all in one `Due/<title>.md`)
 
 - Senior vs Junior developer perspective
-- How it works overview  
+- How it works overview
 - Full documentation
 - Junior-friendly explanation
 - Best code chunk + why it's good
 - Conversation starter questions
-- LinkedIn post draft (manual post)
+- LinkedIn post draft
+- Tags

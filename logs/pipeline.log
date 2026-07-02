@@ -1,2 +1,84 @@
-[2026-06-22T20:59:22.536Z] INFO: Pipeline start → your_github_username/your_private_repo_name (main)
-[2026-06-22T20:59:22.992Z] ERROR: Pipeline error: Request failed with status code 401
+[2026-07-01T17:17:32.169Z] INFO: Pipeline start → kanchan-nath/Spark.E (main)
+[2026-07-01T17:17:33.864Z] INFO: Fetched 258 files from kanchan-nath/Spark.E
+[2026-07-01T17:17:33.864Z] INFO: 258 files found. Processing one per run...
+[2026-07-01T17:17:33.865Z] INFO: Processing: .DS_Store
+[2026-07-01T17:17:34.892Z] INFO: Groq analyzing: .DS_Store
+[2026-07-01T17:17:36.174Z] ERROR: JSON parse failed for .DS_Store: Unexpected token '<', "<?xml vers"... is not valid JSON
+[2026-07-01T17:17:36.175Z] ERROR: Raw response: <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+         "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>DSStoreCr
+[2026-07-01T17:17:36.175Z] ERROR: Pipeline error: Groq returned invalid JSON for .DS_Store
+[2026-07-01T17:18:17.148Z] INFO: Pipeline start → kanchan-nath/Spark.E (main)
+[2026-07-01T17:18:18.549Z] INFO: Fetched 258 files from kanchan-nath/Spark.E
+[2026-07-01T17:18:18.549Z] INFO: 258 files found. Processing one per run...
+[2026-07-01T17:18:18.551Z] INFO: Processing: .DS_Store
+[2026-07-01T17:18:20.024Z] INFO: Groq analyzing: .DS_Store
+[2026-07-01T17:18:21.610Z] ERROR: JSON parse failed for .DS_Store: Unexpected token '<', "<?php
+clas"... is not valid JSON
+[2026-07-01T17:18:21.610Z] ERROR: Raw response: <?php
+class DB {
+  function __construct() {
+    $this->db = new mysqli("localhost", "root", "", "mydatabase");
+  }
+
+  function executeQuery($query) {
+    return $this->db->query($query);
+  }
+}
+
+class 
+[2026-07-01T17:18:21.610Z] ERROR: Pipeline error: Groq returned invalid JSON for .DS_Store
+[2026-07-01T17:18:50.164Z] INFO: Pipeline start → kanchan-nath/Spark.E (main)
+[2026-07-01T17:18:51.374Z] INFO: Fetched 258 files from kanchan-nath/Spark.E
+[2026-07-01T17:18:51.374Z] INFO: 258 files found. Processing one per run...
+[2026-07-01T17:18:51.376Z] INFO: Processing: .DS_Store
+[2026-07-01T17:18:52.354Z] INFO: Groq analyzing: .DS_Store
+[2026-07-01T17:18:53.659Z] ERROR: JSON parse failed for .DS_Store: Unexpected token '<', "<?php
+clas"... is not valid JSON
+[2026-07-01T17:18:53.660Z] ERROR: Raw response: <?php
+class MyClass {
+    public function myMethod() {
+        $array = [];
+        $array[] = "Hello";
+        $array[] = "World";
+        return $array;
+    }
+}
+?>
+```
+[2026-07-01T17:18:53.660Z] ERROR: Pipeline error: Groq returned invalid JSON for .DS_Store
+[2026-07-01T17:20:35.651Z] INFO: Pipeline start → kanchan-nath/Spark.E (main)
+[2026-07-01T17:20:36.997Z] INFO: Fetched 251 files from kanchan-nath/Spark.E
+[2026-07-01T17:20:36.997Z] INFO: 251 files found. Processing one per run...
+[2026-07-01T17:20:36.999Z] INFO: Processing: .circleci/config.yml
+[2026-07-01T17:20:37.882Z] INFO: Groq analyzing: .circleci/config.yml
+[2026-07-01T17:20:41.967Z] INFO: Groq done: .circleci/config.yml
+[2026-07-01T17:20:41.969Z] INFO: Saved to Due: /Users/kanchannath/Coding/Due/Unlocking-Efficient-CICD-A-Deep-Dive-into-CircleCI-Configuration.md
+[2026-07-01T17:20:41.969Z] ERROR: Pipeline error: ENOENT: no such file or directory, open '/Users/kanchannath/Coding/logs/processed.json'
+[2026-07-01T17:23:17.006Z] INFO: Pipeline start → kanchan-nath/Spark.E (main)
+[2026-07-01T17:23:19.441Z] INFO: Fetched 251 files from kanchan-nath/Spark.E
+[2026-07-01T17:23:19.441Z] INFO: 251 files found. Processing one per run...
+[2026-07-01T17:23:19.442Z] INFO: Processing: .circleci/config.yml
+[2026-07-01T17:23:20.363Z] INFO: Groq analyzing: .circleci/config.yml
+[2026-07-01T17:23:24.454Z] INFO: Groq done: .circleci/config.yml
+[2026-07-01T17:23:24.455Z] INFO: Saved to Due: /Users/kanchannath/Coding/Due/Automating-Node.js-Testing-and-Deployment-with-CircleCI-A-Senior-Dev's-Perspective.md
+[2026-07-01T17:23:24.455Z] ERROR: Pipeline error: ENOENT: no such file or directory, open '/Users/kanchannath/Coding/logs/processed.json'
+[2026-07-01T17:25:09.985Z] INFO: Pipeline start → kanchan-nath/Spark.E (main)
+[2026-07-01T17:25:13.635Z] INFO: Fetched 251 files from kanchan-nath/Spark.E
+[2026-07-01T17:25:13.635Z] INFO: 251 files found. Processing one per run...
+[2026-07-01T17:25:13.636Z] INFO: Processing: .circleci/config.yml
+[2026-07-01T17:25:16.055Z] INFO: Groq analyzing: .circleci/config.yml
+[2026-07-01T17:25:25.057Z] ERROR: JSON parse failed for .circleci/config.yml: Unexpected token '#', "### Introd"... is not valid JSON
+[2026-07-01T17:25:25.057Z] ERROR: Raw response: ### Introduction to CircleCI Configuration
+#### Overview of the `.circleci/config.yml` File
+The provided `.circleci/config.yml` file is a configuration file for CircleCI, a popular continuous integrat
+[2026-07-01T17:25:25.058Z] ERROR: Pipeline error: Groq returned invalid JSON for .circleci/config.yml
+[2026-07-01T17:26:04.325Z] INFO: Pipeline start → kanchan-nath/Spark.E (main)
+[2026-07-01T17:26:09.335Z] INFO: Fetched 251 files from kanchan-nath/Spark.E
+[2026-07-01T17:26:09.335Z] INFO: 251 files found. Processing one per run...
+[2026-07-01T17:26:09.337Z] INFO: Processing: .circleci/config.yml
+[2026-07-01T17:26:10.582Z] INFO: Groq analyzing: .circleci/config.yml
+[2026-07-01T17:26:15.915Z] ERROR: Pipeline error: Cannot read properties of undefined (reading 'title')

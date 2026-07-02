@@ -7,11 +7,9 @@ import cron from "node-cron";
 import logger from "../src/utils/logger.js";
 import { fetchRepoTree, fetchFileContent } from "../src/services/github.service.js";
 import { analyzeFile } from "../src/services/groq.service.js";
-import { publishToHashnode } from "../src/services/hashnode.service.js";
-import { publishToDevto } from "../src/services/devto.service.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const DRAFTS_DIR = path.resolve(__dirname, "../../drafts");
+const DUE_DIR = path.resolve(__dirname, "../../Due");
 const PROCESSED_LOG = path.resolve(__dirname, "../../logs/processed.json");
 
 // ─── Processed file tracker ───────────────────────────────────────────────────
@@ -32,13 +30,85 @@ const isProcessed = (filePath) => {
   return !!processed[filePath];
 };
 
-// ─── LinkedIn draft saver ─────────────────────────────────────────────────────
+// ─── Build full markdown from LLM output ─────────────────────────────────────
 
-const saveLinkedInDraft = (filePath, linkedinDraft) => {
-  const safeName = filePath.replace(/\//g, "_").replace(/\./g, "-");
-  const draftPath = path.join(DRAFTS_DIR, `${safeName}-linkedin.txt`);
-  fs.writeFileSync(draftPath, linkedinDraft);
-  logger.info(`LinkedIn draft saved: ${draftPath}`);
+const buildMarkdown = (filePath, content) => {
+  return `# ${content.title}
+
+## Senior vs Junior Developer Perspective
+
+${content.seniorVsJunior}
+
+---
+
+## How It Works
+
+${content.howItWorks}
+
+---
+
+## Code Deep Dive
+
+\`\`\`
+${content.bestCodeChunk.code}
+\`\`\`
+
+${content.bestCodeChunk.explanation}
+
+---
+
+## Documentation
+
+${content.documentation}
+
+---
+
+## Explanation for Junior Developers
+
+${content.juniorExplanation}
+
+---
+
+## Questions to Think About
+
+${content.conversationStarter}
+
+---
+
+## LinkedIn Draft
+
+${content.linkedinDraft}
+
+---
+
+**Tags:** ${content.tags.join(", ")}
+
+*File analyzed: \`${filePath}\`*
+`.trim();
+};
+
+// ─── Sanitize title → safe filename ───────────────────────────────────────────
+
+const slugifyTitle = (title) => {
+  return title
+    .trim()
+    .replace(/[\\/:*?"<>|]/g, "")
+    .replace(/\s+/g, "-")
+    .slice(0, 120);
+};
+
+// ─── Save LLM output to Due/ folder ───────────────────────────────────────────
+
+const saveToDue = (filePath, content) => {
+  if (!fs.existsSync(DUE_DIR)) fs.mkdirSync(DUE_DIR, { recursive: true });
+
+  const markdown = buildMarkdown(filePath, content);
+  const safeTitle = slugifyTitle(content.title);
+  const outPath = path.join(DUE_DIR, `${safeTitle}.md`);
+
+  fs.writeFileSync(outPath, markdown);
+  logger.info(`Saved to Due: ${outPath}`);
+  return outPath;
 };
 
 // ─── Process single file ──────────────────────────────────────────────────────
@@ -63,30 +133,12 @@ const processFile = async (owner, repo, filePath) => {
   // 2. Groq analyze + generate content
   const content = await analyzeFile(filePath, fileContent);
 
-  // 3. publish to platforms
-  const results = { filePath };
+  // 3. save full LLM output to Due/ as title.md (manual posting)
+  const savedPath = saveToDue(filePath, content);
 
-  try {
-    const hashnodePost = await publishToHashnode(filePath, content);
-    results.hashnode = hashnodePost.url;
-  } catch (err) {
-    logger.error(`Hashnode failed for ${filePath}: ${err.message}`);
-    results.hashnodeError = err.message;
-  }
+  const results = { filePath, savedTo: savedPath };
 
-  try {
-    const devtoPost = await publishToDevto(filePath, content);
-    results.devto = devtoPost.url;
-  } catch (err) {
-    logger.error(`Dev.to failed for ${filePath}: ${err.message}`);
-    results.devtoError = err.message;
-  }
-
-  // 4. save LinkedIn draft
-  saveLinkedInDraft(filePath, content.linkedinDraft);
-  results.linkedinDraft = "saved to drafts/";
-
-  // 5. mark as processed
+  // 4. mark as processed
   markProcessed(filePath, results);
 
   // small delay to avoid rate limits

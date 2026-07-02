@@ -12,9 +12,13 @@ const SKIP_EXTENSIONS = [
 
 const SKIP_DIRS = ["node_modules", ".git", "dist", "build", ".next", "coverage"];
 
+const SKIP_FILENAMES = [".DS_Store", "Thumbs.db", "desktop.ini", ".gitkeep"];
+
 const shouldSkip = (path) => {
   if (SKIP_DIRS.some((dir) => path.includes(`/${dir}/`) || path.startsWith(`${dir}/`))) return true;
   if (SKIP_EXTENSIONS.some((ext) => path.endsWith(ext))) return true;
+  const filename = path.split("/").pop();
+  if (SKIP_FILENAMES.includes(filename)) return true;
   return false;
 };
 
