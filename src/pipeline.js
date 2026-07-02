@@ -9,8 +9,8 @@ import { fetchRepoTree, fetchFileContent } from "../src/services/github.service.
 import { analyzeFile } from "../src/services/groq.service.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const DUE_DIR = path.resolve(__dirname, "../../Due");
-const PROCESSED_LOG = path.resolve(__dirname, "../../logs/processed.json");
+const DUE_DIR = path.resolve(__dirname, "../Due");
+const PROCESSED_LOG = path.resolve(__dirname, "../logs/processed.json");
 
 // ─── Processed file tracker ───────────────────────────────────────────────────
 
@@ -30,62 +30,6 @@ const isProcessed = (filePath) => {
   return !!processed[filePath];
 };
 
-// ─── Build full markdown from LLM output ─────────────────────────────────────
-
-const buildMarkdown = (filePath, content) => {
-  return `# ${content.title}
-
-## Senior vs Junior Developer Perspective
-
-${content.seniorVsJunior}
-
----
-
-## How It Works
-
-${content.howItWorks}
-
----
-
-## Code Deep Dive
-
-\`\`\`
-${content.bestCodeChunk.code}
-\`\`\`
-
-${content.bestCodeChunk.explanation}
-
----
-
-## Documentation
-
-${content.documentation}
-
----
-
-## Explanation for Junior Developers
-
-${content.juniorExplanation}
-
----
-
-## Questions to Think About
-
-${content.conversationStarter}
-
----
-
-## LinkedIn Draft
-
-${content.linkedinDraft}
-
----
-
-**Tags:** ${content.tags.join(", ")}
-
-*File analyzed: \`${filePath}\`*
-`.trim();
-};
 
 // ─── Sanitize title → safe filename ───────────────────────────────────────────
 
@@ -99,11 +43,12 @@ const slugifyTitle = (title) => {
 
 // ─── Save LLM output to Due/ folder ───────────────────────────────────────────
 
-const saveToDue = (filePath, content) => {
+const saveToDue = (filePath, markdown) => {
   if (!fs.existsSync(DUE_DIR)) fs.mkdirSync(DUE_DIR, { recursive: true });
 
-  const markdown = buildMarkdown(filePath, content);
-  const safeTitle = slugifyTitle(content.title);
+  const titleMatch = markdown.match(/^#\s+(.+)$/m);
+  const title = titleMatch ? titleMatch[1].trim() : filePath;
+  const safeTitle = slugifyTitle(title);
   const outPath = path.join(DUE_DIR, `${safeTitle}.md`);
 
   fs.writeFileSync(outPath, markdown);

@@ -82,3 +82,56 @@ The provided `.circleci/config.yml` file is a configuration file for CircleCI, a
 [2026-07-01T17:26:09.337Z] INFO: Processing: .circleci/config.yml
 [2026-07-01T17:26:10.582Z] INFO: Groq analyzing: .circleci/config.yml
 [2026-07-01T17:26:15.915Z] ERROR: Pipeline error: Cannot read properties of undefined (reading 'title')
+[2026-07-01T17:31:24.227Z] INFO: Pipeline start → kanchan-nath/Spark.E (main)
+[2026-07-01T17:31:33.777Z] INFO: Fetched 251 files from kanchan-nath/Spark.E
+[2026-07-01T17:31:33.777Z] INFO: 251 files found. Processing one per run...
+[2026-07-01T17:31:33.779Z] INFO: Processing: .circleci/config.yml
+[2026-07-01T17:31:38.635Z] INFO: Groq analyzing: .circleci/config.yml
+[2026-07-01T17:31:43.577Z] ERROR: Pipeline error: Cannot read properties of undefined (reading 'title')
+[2026-07-02T04:01:11.471Z] INFO: Pipeline start → kanchan-nath/Spark.E (main)
+[2026-07-02T04:01:41.495Z] ERROR: Pipeline error: getaddrinfo ENOTFOUND api.github.com
+[2026-07-02T04:02:14.593Z] INFO: Pipeline start → kanchan-nath/Spark.E (main)
+[2026-07-02T04:03:53.381Z] ERROR: Pipeline error: read ETIMEDOUT
+[2026-07-02T04:06:55.647Z] INFO: Pipeline start → kanchan-nath/Spark.E (main)
+[2026-07-02T04:07:00.513Z] INFO: Fetched 251 files from kanchan-nath/Spark.E
+[2026-07-02T04:07:00.513Z] INFO: 251 files found. Processing one per run...
+[2026-07-02T04:07:00.514Z] INFO: Processing: .circleci/config.yml
+[2026-07-02T04:07:03.040Z] INFO: Groq analyzing: .circleci/config.yml
+[2026-07-02T04:07:06.899Z] ERROR: Pipeline error: Cannot read properties of undefined (reading 'title')
+[2026-07-02T04:29:14.425Z] INFO: Pipeline start → kanchan-nath/Spark.E (main)
+[2026-07-02T04:29:15.641Z] INFO: Fetched 251 files from kanchan-nath/Spark.E
+[2026-07-02T04:29:15.642Z] INFO: 251 files found. Processing one per run...
+[2026-07-02T04:29:15.643Z] INFO: Processing: .circleci/config.yml
+[2026-07-02T04:29:16.542Z] INFO: Groq analyzing: .circleci/config.yml
+[2026-07-02T04:29:20.093Z] ERROR: Pipeline error: Cannot read properties of undefined (reading 'match')
+[2026-07-02T04:31:22.071Z] INFO: Pipeline start → kanchan-nath/Spark.E (main)
+[2026-07-02T04:31:23.614Z] INFO: Fetched 251 files from kanchan-nath/Spark.E
+[2026-07-02T04:31:23.614Z] INFO: 251 files found. Processing one per run...
+[2026-07-02T04:31:23.615Z] INFO: Processing: .circleci/config.yml
+[2026-07-02T04:31:24.852Z] INFO: Groq analyzing: .circleci/config.yml
+[2026-07-02T04:31:28.699Z] INFO: Saved to Due: /Users/kanchannath/Coding/Due/CircleCI-Configuration-for-Node.js-Applications-A-Comprehensive-Guide.md
+[2026-07-02T04:31:28.699Z] ERROR: Pipeline error: ENOENT: no such file or directory, open '/Users/kanchannath/Coding/logs/processed.json'
+[2026-07-02T04:35:20.005Z] INFO: Pipeline start → kanchan-nath/Spark.E (main)
+[2026-07-02T04:35:21.457Z] INFO: Fetched 251 files from kanchan-nath/Spark.E
+[2026-07-02T04:35:21.457Z] INFO: 251 files found. Processing one per run...
+[2026-07-02T04:35:21.458Z] INFO: Processing: .circleci/config.yml
+[2026-07-02T04:35:22.340Z] INFO: Groq analyzing: .circleci/config.yml
+[2026-07-02T04:35:25.908Z] INFO: Saved to Due: /Users/kanchannath/Coding/content-pipeline/Due/CircleCI-Configuration-for-Node.js-Projects-A-Comprehensive-Guide.md
+[2026-07-02T04:35:28.909Z] INFO: Pipeline done. 250 files remaining.
+[2026-07-02T04:37:03.676Z] INFO: Fetched 251 files from kanchan-nath/Spark.E
+[2026-07-02T04:37:03.686Z] INFO: Processing all 250 unprocessed files...
+[2026-07-02T04:37:03.687Z] INFO: Processing: .coderabbit.yaml
+[2026-07-02T04:37:04.575Z] INFO: Groq analyzing: .coderabbit.yaml
+[2026-07-02T04:37:08.039Z] INFO: Saved to Due: /Users/kanchannath/Coding/content-pipeline/Due/Auto-Review-Configuration-in-CodeRabbit.md
+[2026-07-02T04:37:11.042Z] INFO: Processing: .vscode/extensions.json
+[2026-07-02T04:37:12.130Z] INFO: Groq analyzing: .vscode/extensions.json
+[2026-07-02T04:37:15.771Z] INFO: Saved to Due: /Users/kanchannath/Coding/content-pipeline/Due/Optimizing-Development-Environment-with-VS-Code-Extensions.md
+[2026-07-02T04:37:18.772Z] INFO: Processing: .vscode/launch.json
+[2026-07-02T04:37:19.799Z] INFO: Groq analyzing: .vscode/launch.json
+[2026-07-02T04:37:23.264Z] INFO: Saved to Due: /Users/kanchannath/Coding/content-pipeline/Due/Configuring-Node.js-Debugging-with-VS-Code-A-Step-by-Step-Guide.md
+[2026-07-02T04:37:26.266Z] INFO: Processing: .vscode/settings.json 
+[2026-07-02T04:38:10.147Z] INFO: Pipeline start → kanchan-nath/Spark.E (main)
+[2026-07-02T04:38:11.550Z] INFO: Fetched 251 files from kanchan-nath/Spark.E
+[2026-07-02T04:38:11.550Z] INFO: 251 files found. Processing one per run...
+[2026-07-02T04:38:11.554Z] INFO: Processing: .vscode/settings.json 
+[2026-07-02T04:38:12.467Z] ERROR: Pipeline error: Request failed with status code 404
