@@ -1,9 +1,44 @@
-import Groq from "groq-sdk";
+// import Groq from "groq-sdk";
+// import logger from "../utils/logger.js";
+
+// const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
+
+// const MODEL = "llama-3.3-70b-versatile";
+
+// const SYSTEM_PROMPT = `You are a senior software engineer and technical documentation writer with 10+ years experience, and an SEO content strategist who understands Google's search ranking factors for developer content.`;
+
+// /**
+//  * Analyze single file and return all content pieces
+//  */
+// const analyzeFile = async (filePath, fileContent) => {
+//   logger.info(`Groq analyzing: ${filePath}`);
+
+//   const completion = await groq.chat.completions.create({
+//     model: MODEL,
+//     messages: [
+//       { role: "system", content: SYSTEM_PROMPT },
+//       { role: "user", content: buildPrompt(filePath, fileContent) },
+//     ],
+//     temperature: 1,
+//     // max_tokens: 4000,
+//   });
+
+//   const raw = completion.choices[0]?.message?.content?.trim();
+//   console.log(raw);
+//   return raw
+// };
+
+// export { analyzeFile };
+
+import OpenAI from "openai";
 import logger from "../utils/logger.js";
 
-const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
+const client = new OpenAI({
+  baseURL: "https://integrate.api.nvidia.com/v1",
+  apiKey: process.env.NVIDIA_API_KEY,
+});
 
-const MODEL = "llama-3.3-70b-versatile";
+const MODEL = "deepseek-ai/deepseek-v4-pro";
 
 const SYSTEM_PROMPT = `You are a senior software engineer and technical documentation writer with 10+ years experience, and an SEO content strategist who understands Google's search ranking factors for developer content.`;
 
@@ -88,20 +123,26 @@ Where the prompt is silent (exact section order, how many diagrams per file, dep
  * Analyze single file and return all content pieces
  */
 const analyzeFile = async (filePath, fileContent) => {
-  logger.info(`Groq analyzing: ${filePath}`);
+  logger.info(`LLM analyzing: ${filePath}`);
 
-  const completion = await groq.chat.completions.create({
+  const completion = await client.chat.completions.create({
     model: MODEL,
     messages: [
       { role: "system", content: SYSTEM_PROMPT },
       { role: "user", content: buildPrompt(filePath, fileContent) },
     ],
     temperature: 1,
-    // max_tokens: 4000,
+    top_p: 0.95,
+    max_completion_tokens: 16384,
+    // deepseek-v4-pro is a reasoning model — disable thinking so
+    // the response body is pure JSON, not reasoning + JSON
+    // extra_body: { chat_template_kwargs: { thinking: false } },
+    stream: false,
   });
 
   const raw = completion.choices[0]?.message?.content?.trim();
-  console.log(raw);
+  logger.info(`LLM done: ${filePath}`);
+  
   return raw
 };
 
